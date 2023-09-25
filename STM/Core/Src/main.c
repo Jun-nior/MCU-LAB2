@@ -95,11 +95,37 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
+  int hour=15, minute=8, second=50;
+  setTimer1(100);
+  setTimer2(50);
   while (1)
   {
-    /* USER CODE END WHILE */
-
-    /* USER CODE BEGIN 3 */
+	  if (second>=60) {
+		  second=0;
+		  minute++;
+	  }
+	  if (minute>=60) {
+		  minute=0;
+		  hour++;
+	  }
+	  if (hour>=24) {
+		  hour=0;
+	  }
+	  updateClockBuffer(led_buffer,hour, minute);
+	  if (timer1_flag==1) {
+		  setTimer1(100);
+		  second++;
+		  HAL_GPIO_TogglePin(PA4_GPIO_Port, PA4_Pin);
+		  HAL_GPIO_TogglePin(PA5_GPIO_Port, PA5_Pin);
+	  }
+	  if (timer2_flag==1) {
+		  setTimer2(50);
+		  update7SEG(index_led);
+		  index_led++;
+		  if (index_led>3) {
+			  index_led=0;
+		  }
+	  }
   }
   /* USER CODE END 3 */
 }
