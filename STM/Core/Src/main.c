@@ -24,6 +24,7 @@
 /* USER CODE BEGIN Includes */
 #include "software_timer.h"
 #include "7seg.h"
+#include "matrix.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -95,11 +96,50 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
+  int hour=15, minute=8, second=50;
+  setTimer1(10);
+  setTimer2(15);
+  setTimer3(15);
+  setTimer4(30);
   while (1)
   {
-    /* USER CODE END WHILE */
-
-    /* USER CODE BEGIN 3 */
+	  if (timer1_flag==1) {
+		  if (second>=60) {
+			  second=0;
+			  minute++;
+		  }
+		  if (minute>=60) {
+			  minute=0;
+			  hour++;
+		  }
+		  if (hour>=24) {
+			  hour=0;
+		  }
+		  second++;
+		  updateClockBuffer(led_buffer,hour, minute);
+		  setTimer1(100);
+	  }
+	  if (timer2_flag==1) {
+		  HAL_GPIO_TogglePin(PA4_GPIO_Port, PA4_Pin);
+		  HAL_GPIO_TogglePin(PA5_GPIO_Port, PA5_Pin);
+		  setTimer2(100);
+	  }
+	  if (timer3_flag==1) {
+		  update7SEG(index_led);
+		  index_led++;
+		  if (index_led>3) {
+			  index_led=0;
+		  }
+		  setTimer3(50);
+	  }
+	  if (timer4_flag==1) {
+		  updateLEDMatrix(index_led_matrix);
+		  index_led_matrix++;
+		  if (index_led_matrix>=MAX_LED_MATRIX) {
+			  index_led_matrix=0;
+		  }
+		  setTimer4(15);
+	  }
   }
   /* USER CODE END 3 */
 }
@@ -198,26 +238,38 @@ static void MX_GPIO_Init(void)
   __HAL_RCC_GPIOB_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOA, PA4_Pin|PA5_Pin|PA6_Pin|PA7_Pin
-                          |PA8_Pin|PA9_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOA, PA1_Pin|PA2_Pin|PA3_Pin|PA4_Pin
+                          |PA5_Pin|PA6_Pin|PA7_Pin|PA8_Pin
+                          |PA9_Pin|PA10_Pin|PA11_Pin|PA12_Pin
+                          |PA13_Pin|PA14_Pin|PA15_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0|GPIO_PIN_1|GPIO_PIN_2|GPIO_PIN_3
-                          |GPIO_PIN_4|GPIO_PIN_5|GPIO_PIN_6|GPIO_PIN_7, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0|GPIO_PIN_1|GPIO_PIN_2|GPIO_PIN_10
+                          |GPIO_PIN_11|GPIO_PIN_12|GPIO_PIN_13|GPIO_PIN_14
+                          |GPIO_PIN_15|GPIO_PIN_3|GPIO_PIN_4|GPIO_PIN_5
+                          |GPIO_PIN_6|GPIO_PIN_7|GPIO_PIN_8|GPIO_PIN_9, GPIO_PIN_RESET);
 
-  /*Configure GPIO pins : PA4_Pin PA5_Pin PA6_Pin PA7_Pin
-                           PA8_Pin PA9_Pin */
-  GPIO_InitStruct.Pin = PA4_Pin|PA5_Pin|PA6_Pin|PA7_Pin
-                          |PA8_Pin|PA9_Pin;
+  /*Configure GPIO pins : PA1_Pin PA2_Pin PA3_Pin PA4_Pin
+                           PA5_Pin PA6_Pin PA7_Pin PA8_Pin
+                           PA9_Pin PA10_Pin PA11_Pin PA12_Pin
+                           PA13_Pin PA14_Pin PA15_Pin */
+  GPIO_InitStruct.Pin = PA1_Pin|PA2_Pin|PA3_Pin|PA4_Pin
+                          |PA5_Pin|PA6_Pin|PA7_Pin|PA8_Pin
+                          |PA9_Pin|PA10_Pin|PA11_Pin|PA12_Pin
+                          |PA13_Pin|PA14_Pin|PA15_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : PB0 PB1 PB2 PB3
-                           PB4 PB5 PB6 PB7 */
-  GPIO_InitStruct.Pin = GPIO_PIN_0|GPIO_PIN_1|GPIO_PIN_2|GPIO_PIN_3
-                          |GPIO_PIN_4|GPIO_PIN_5|GPIO_PIN_6|GPIO_PIN_7;
+  /*Configure GPIO pins : PB0 PB1 PB2 PB10
+                           PB11 PB12 PB13 PB14
+                           PB15 PB3 PB4 PB5
+                           PB6 PB7 PB8 PB9 */
+  GPIO_InitStruct.Pin = GPIO_PIN_0|GPIO_PIN_1|GPIO_PIN_2|GPIO_PIN_10
+                          |GPIO_PIN_11|GPIO_PIN_12|GPIO_PIN_13|GPIO_PIN_14
+                          |GPIO_PIN_15|GPIO_PIN_3|GPIO_PIN_4|GPIO_PIN_5
+                          |GPIO_PIN_6|GPIO_PIN_7|GPIO_PIN_8|GPIO_PIN_9;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
