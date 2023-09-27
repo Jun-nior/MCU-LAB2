@@ -100,7 +100,8 @@ int main(void)
   setTimer1(10);
   setTimer2(15);
   setTimer3(15);
-  setTimer4(30);
+  setTimer4(5);
+  int state=0;
   while (1)
   {
 	  if (timer1_flag==1) {
@@ -137,8 +138,13 @@ int main(void)
 		  index_led_matrix++;
 		  if (index_led_matrix>=MAX_LED_MATRIX) {
 			  index_led_matrix=0;
+			  state++;
+			  if (state>=8) {
+				  state=0;
+			  }
+			  animation(state,matrix_buffer);
 		  }
-		  setTimer4(15);
+		  setTimer4(5);
 	  }
   }
   /* USER CODE END 3 */

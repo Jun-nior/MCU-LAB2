@@ -123,5 +123,91 @@ void updateLEDMatrix(int index) {
 	default:
 		break;
 	}
+}
 
+void animation(int state, uint8_t *matrix_buffer) {
+	switch (state) {
+	case 0:
+		matrix_buffer[0]=0x18;
+		matrix_buffer[1]=0x3C;
+		matrix_buffer[2]=0x66;
+		matrix_buffer[3]=0x66;
+		matrix_buffer[4]=0x7E;
+		matrix_buffer[5]=0x7E;
+		matrix_buffer[6]=0x66;
+		matrix_buffer[7]=0x66;
+		break;
+	case 1:
+		matrix_buffer[0]=0x30;
+		matrix_buffer[1]=0x78;
+		matrix_buffer[2]=0xCC;
+		matrix_buffer[3]=0xCC;
+		matrix_buffer[4]=0xFC;
+		matrix_buffer[5]=0xFC;
+		matrix_buffer[6]=0xCC;
+		matrix_buffer[7]=0xCC;
+		break;
+	case 2:
+		matrix_buffer[0]=0x60;
+		matrix_buffer[1]=0xF0;
+		matrix_buffer[2]=0x99;
+		matrix_buffer[3]=0x99;
+		matrix_buffer[4]=0xF9;
+		matrix_buffer[5]=0xF9;
+		matrix_buffer[6]=0x99;
+		matrix_buffer[7]=0x99;
+		break;
+	case 3:
+		matrix_buffer[0]=0xC0;
+		matrix_buffer[1]=0xE1;
+		matrix_buffer[2]=0x33;
+		matrix_buffer[3]=0x33;
+		matrix_buffer[4]=0xF3;
+		matrix_buffer[5]=0xF3;
+		matrix_buffer[6]=0x33;
+		matrix_buffer[7]=0x33;
+		break;
+	case 4:
+		matrix_buffer[0]=0x81;
+		matrix_buffer[1]=0xC3;
+		matrix_buffer[2]=0x66;
+		matrix_buffer[3]=0x66;
+		matrix_buffer[4]=0xE7;
+		matrix_buffer[5]=0xE7;
+		matrix_buffer[6]=0x66;
+		matrix_buffer[7]=0x66;
+		break;
+	case 5:
+		matrix_buffer[0]=0x03;
+		matrix_buffer[1]=0x87;
+		matrix_buffer[2]=0xCC;
+		matrix_buffer[3]=0xCC;
+		matrix_buffer[4]=0xCF;
+		matrix_buffer[5]=0xCF;
+		matrix_buffer[6]=0xCC;
+		matrix_buffer[7]=0xCC;
+		break;
+	case 6:
+		matrix_buffer[0]=0x06;
+		matrix_buffer[1]=0x0F;
+		matrix_buffer[2]=0x99;
+		matrix_buffer[3]=0x99;
+		matrix_buffer[4]=0x9F;
+		matrix_buffer[5]=0x9F;
+		matrix_buffer[6]=0x99;
+		matrix_buffer[7]=0x99;
+		break;
+	case 7:
+		matrix_buffer[0]=0x0C;
+		matrix_buffer[1]=0x1E;
+		matrix_buffer[2]=0x33;
+		matrix_buffer[3]=0x33;
+		matrix_buffer[4]=0x3F;
+		matrix_buffer[5]=0x3F;
+		matrix_buffer[6]=0x33;
+		matrix_buffer[7]=0x33;
+		break;
+	default:
+		break;
+	}
 }
