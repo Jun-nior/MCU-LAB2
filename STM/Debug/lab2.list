@@ -682,8 +682,8 @@ int main(void)
   setTimer1(100);
  80005c0:	2064      	movs	r0, #100	; 0x64
  80005c2:	f000 f933 	bl	800082c <setTimer1>
-  setTimer2(100);
- 80005c6:	2064      	movs	r0, #100	; 0x64
+  setTimer2(25);
+ 80005c6:	2019      	movs	r0, #25
  80005c8:	f000 f944 	bl	8000854 <setTimer2>
   HAL_GPIO_WritePin(PA6_GPIO_Port, PA6_Pin, SET);
  80005cc:	2201      	movs	r2, #1
@@ -729,8 +729,8 @@ int main(void)
  8000618:	681b      	ldr	r3, [r3, #0]
  800061a:	2b01      	cmp	r3, #1
  800061c:	d1ec      	bne.n	80005f8 <main+0x68>
-		  setTimer2(100);
- 800061e:	2064      	movs	r0, #100	; 0x64
+		  setTimer2(25);
+ 800061e:	2019      	movs	r0, #25
  8000620:	f000 f918 	bl	8000854 <setTimer2>
 		  update7SEG(index_led);
  8000624:	463b      	mov	r3, r7

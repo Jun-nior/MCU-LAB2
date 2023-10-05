@@ -132,7 +132,7 @@ int main(void)
 	  }
   }
   setTimer1(100);
-  setTimer2(100);
+  setTimer2(25);
   HAL_GPIO_WritePin(PA6_GPIO_Port, PA6_Pin, SET);
   HAL_GPIO_WritePin(PA7_GPIO_Port, PA7_Pin, SET);
   HAL_GPIO_WritePin(PA8_GPIO_Port, PA8_Pin, SET);
@@ -145,7 +145,7 @@ int main(void)
 		  HAL_GPIO_TogglePin(PA5_GPIO_Port, PA5_Pin);
 	  }
 	  if (timer2_flag==1) {
-		  setTimer2(100);
+		  setTimer2(25);
 		  update7SEG(index_led);
 		  index_led++;
 		  if (index_led>3) {
