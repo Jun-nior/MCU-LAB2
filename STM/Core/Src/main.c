@@ -99,7 +99,7 @@ int main(void)
   int hour=15, minute=8, second=50;
   setTimer1(10);
   setTimer2(15);
-  setTimer3(15);
+  setTimer3(25);
   setTimer4(5);
   int state=0;
   while (1)
@@ -131,7 +131,7 @@ int main(void)
 		  if (index_led>3) {
 			  index_led=0;
 		  }
-		  setTimer3(50);
+		  setTimer3(25);
 	  }
 	  if (timer4_flag==1) {
 		  updateLEDMatrix(index_led_matrix);
